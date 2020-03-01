@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block body %} 
+
+  <h2>Upload Input Data File(s) For A Selected Case</h2>
+  <br>
+  <div id="loading"></div>
+  <div id="content">
+
+  {% from "includes/_formhelpers.html" import render_field %}
+  <form method="POST" action="" enctype="multipart/form-data">
+
+    {{ form.csrf_token }}
+    <div class="form-group">
+      {{ render_field(form.select) }}<br><br>
+      {{ render_field(form.topology) }}
+     Select File(s) to Upload: 
+     <p style = "color: red; font"><b>\\hou-file1\woodmac$\Latin America Markets\00 DEV\</b></p>
+      {{ render_field(form.file_hub) }}<br><br>
+      {{ render_field(form.file_demand) }}<br><br>
+      {{ render_field(form.file_sup) }}<br><br>
+      {{ render_field(form.file_arc) }}<br><br>
+      {{ render_field(form.file_sto) }}<br><br>
+      {{ render_field(form.file_exp) }}<br><br>
+
+  
+
+  <br>
+
+    <button type="submit" class="btn btn-sm btn-success" style="font-size:100%;" onclick="loading();">Update</button>
+  </div>
+  </form>
+</div>
+  <br>
+   <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+    <a href="/run_nemo" class="btn btn-neutral float-right" accesskey="n" rel="next" style="text-decoration: none; color: black;background-color: white;font-size:85%;border: 2px solid black;">RunNeMo <span class="fa fa-arrow-circle-right"></span></a>
+    <a href="/new_case" class="btn btn-neutral" accesskey="p" rel="prev" style="text-decoration: none; color: #000000;background-color: white;border: 2px solid black;font-size:85%;">CreateNewCase<span class="fa fa-arrow-circle-left"></span> </a>
+   </div>
+
+    <script type="text/javascript">// <![CDATA[
+        function loading(){
+            $("#loading").show();
+            $("#content").hide();       
+        }
+    </script>
+
+ 
+{% endblock %}

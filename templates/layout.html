@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>NeMoFlaskApp</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <div style="margin:auto;width:70%;text-align:left;">
+  </head>
+
+
+  <head>
+    <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    input[type=text], select, textarea{
+        width: 100%;
+        padding: 0;
+        border: 1px solid #ccc;
+        border-radius: 1px;
+        box-sizing: border-box;
+        resize: vertical;
+    }
+
+    label {
+        padding: 0 1px 0 0;
+        display: inline-block;
+    }
+
+    input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 1px 1px;
+        border: none;
+        border-radius: 1px;
+        cursor: pointer;
+        float: right;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+    .container {
+        border-radius: 1px;
+        background-color: #f2f2f2;
+        padding: 1px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    div#loading {
+        width: 100px;
+        height: 100px;
+        display: none;
+        background: url(/static/ajax-loader_1.gif) no-repeat;
+        cursor: wait;
+    }
+    hr {
+        border: 1px dashed black;
+
+    }
+
+
+    </style>
+  </head>
+  <body>
+    {% include 'includes/_navbar.html' %}
+    <div class="container">
+      {% include 'includes/_messages.html' %}
+      {% block body %} 
+
+      {% endblock %}
+    </div>
+  <br>
+
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+    <script type="text/javascript">// <![CDATA[
+        function loading(){
+            $("#loading").show();
+            $("#content").hide();       
+        }
+// ]]></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+        $("ul.Check:not(:has( > li))").append($("<li>").text("No such year found"));         
+        });
+    </script>
+    <script type="text/javascript">
+    function test_func(data) {
+        console.log(data);
+    }
+    test_func({{ data|safe }})
+</script>
+
+ 
+
+
+  </body>
+</html>

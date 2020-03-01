@@ -1,0 +1,82 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+  <h2>Update DEV</h2>
+  <br>
+  <div id="loading"></div>
+   <div id="content">
+
+  <form >
+    
+       Select Case to Update DEV:
+       <select id = "select_case" name = "case" method="GET">
+          
+          {% for o in data %}
+          <option value = "{{ o.name }}">{{ o.name }}</option>
+          {% endfor %}
+       </select><br><br>
+      
+
+       Select Topology:
+       <select id= "select_topology" name = "topology" >
+         <option value = "Mexico">Mexico</option>
+         <option value = "Southern Cone"> Southern Cone</option> 
+       </select><br><br>
+       <!--
+       Update DEV's supply input:
+       <select id= "supply" name = "supply" >
+         <option value = "YES">YES</option>
+         <option value = "NO"> NO</option> 
+       </select><br><br>
+       Update DEV's demand input:
+       <select id= "demand" name = "demand" >
+         <option value = "YES">YES</option>
+         <option value = "NO"> NO</option> 
+       </select><br><br>
+       Update DEV's pipeline input:
+       <select id= "arc" name = "arc" >
+         <option value = "YES">YES</option>
+         <option value = "NO"> NO</option> 
+       </select><br><br>
+     -->
+     <fieldset>
+      <p> Select Input Data of DEV to be Updated:</p>
+       <input type="checkbox" id="supply" name="supply" value="supply">
+        <label for="supply">Supply Input</label><br>
+       <input type="checkbox" id="demand" name="demand" value="demand">
+        <label for="demand">Demand Input</label><br>
+       <input type="checkbox" id="arc" name="arc" value="arc">
+        <label for="arc">Pipeline Input</label><br>
+     </fieldset><br>
+
+  </div>
+    <button class="btn btn-sm btn-success" type="submit" name="form-name" value="form2" onclick="confirm('Do you want to update DEV?') && loading();" style="font-size:100%;">Update DEV</button>
+    
+   </form>
+
+
+
+  <br><br><br>
+   <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+
+    <a href="/" class="btn btn-neutral float-right" accesskey="n" rel="next" style="text-decoration: none; color: #000000;background-color: white;border: 2px solid black;font-size:85%;">Home <span class="fa fa-arrow-circle-right"></span></a>
+    <a href="/run_nemo" class="btn btn-neutral" accesskey="p" rel="prev" style="text-decoration: none; color: #000000;background-color: white;border: 2px solid black;font-size:85%;">RunNeMo<span class="fa fa-arrow-circle-left"></span> </a>
+
+   </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+    
+    <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+
+
+
+    <script type="text/javascript">// <![CDATA[
+        function loading(){
+            $("#loading").show();
+            $("#content").hide();       
+        }
+    </script>
+   {% endblock %}

@@ -1,0 +1,13 @@
+Flask 
+wtforms
+flask_wtf
+flask_bootstrap
+pandas
+datetime
+werkzeug
+xlwings
+ipaddress
+pymysql
+pulp 
+openpyxl
+pywin32==223

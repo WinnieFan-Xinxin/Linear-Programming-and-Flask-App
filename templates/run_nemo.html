@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+       <div style="margin:auto;width:70%;text-align:left;">
+   </head>
+
+  <head>
+    <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    input[type=text], select, textarea{
+        width: 100%;
+        padding: 0;
+        border: 1px solid #ccc;
+        border-radius: 1px;
+        box-sizing: border-box;
+        resize: vertical;
+    }
+
+    label {
+        padding: 0 1px 0 0;
+        display: inline-block;
+    }
+
+    input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 1px 1px;
+        border: none;
+        border-radius: 1px;
+        cursor: pointer;
+        float: right;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+    .container {
+        border-radius: 1px;
+        background-color: #f2f2f2;
+        padding: 1px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    div#loading {
+        width: 100px;
+        height: 100px;
+        display: none;
+        background: url(/static/ajax-loader_1.gif) no-repeat;
+        cursor: wait;
+    }
+    hr {
+        border: 1px dashed black;
+
+    }
+    /* unvisited link */
+    a#page:link {
+        color: red;
+        text-decoration: underline;
+    }
+
+    /* visited link */
+    a#page:visited {
+        color: green;
+    }
+
+    /* mouse over link */
+    a#page:hover {
+        background: #CDFEAA;
+        color: black;
+        font-size:120%;
+    }
+
+    /* selected link */
+    a#page:active {
+        color: blue;
+    }
+    th {
+        font-size: medium;
+        text-align: center;
+        font-family: Arial;
+        font-weight: normal;
+        padding: 10px 15px;
+        font-family:
+    }
+    input { 
+    text-align: center; 
+    }
+    </style>
+  </head>
+  <body>
+    {% include 'includes/_navbar.html' %}
+
+    <div class="container">
+      {% include 'includes/_messages.html' %}
+
+   {% block body %} 
+   <h2>Run NeMo</h2><br>
+   <div id="loading"></div>
+   <div id="content">
+
+
+    <form >
+
+       Select Case:
+       <select id = "select_case" name = "case" method="GET">
+          
+          {% for o in data %}
+          <option value = "{{ o.name }}">{{ o.name }}</option>
+          {% endfor %}
+       </select><br><br>
+      
+       Starting Year for Selected Case:
+       <select id = "select_start" name = "start" ></select><br><br>
+
+       Ending Year for Selected Case:
+       <select id = "select_end" name = "end" ></select> <br><br>
+
+       Select Toplogy:
+       <select id= "select_topology" name = "topology" >
+         <option value = "Mexico">Mexico</option>
+         <option value = "Southern Cone"> Southern Cone</option> 
+       </select><br><br>
+
+
+     <fieldset>
+      <p> <b> Run Basic Model (Monthly) without Storage and Export:</b> </p>
+       <input type="checkbox" id="NeMo_M (no Max Flow)" name="NeMo_M (no Max Flow)" value="NeMo_M (no Max Flow)">
+       <label for="NeMo_M (no Max Flow)"> NeMo_Monthly (no Max Flow) </label><br>
+       
+       <input type="checkbox" id="NeMo_M (with Max Flow)" name="NeMo_M (with Max Flow)" value="NeMo_M (with Max Flow)">
+       <label for="NeMo_M (with Max Flow)"> NeMo_Monthly (with Max Flow) </label><br>
+
+
+      <p> <b> Run Yearly Model Only with Storage:</b> </p>
+      <p style = "color: red; font">Before Selecting the Following Options, Please Make Sure There are Input Data for Storage </p>
+
+       <input type="checkbox" id="NeMo_Calendar_Y_Sto (no Max Flow)" name="NeMo_Calendar_Y_Sto (no Max Flow)" 
+       value="NeMo_Calendar_Y_Sto (no Max Flow)">
+       <label for="NeMo_Calendar_Y_Sto (no Max Flow)"> NeMo_Calendar_Year_Sto (no Max Flow) </label><br>
+
+       <input type="checkbox" id="NeMo_Calendar_Y_Sto (with Max Flow)" name="NeMo_Calendar_Y_Sto (with Max Flow)" value="NeMo_Calendar_Y_Sto (with Max Flow)">
+       <label for="NeMo_Calendar_Y_Sto (with Max Flow)"> NeMo_Calendar_Year_Sto (with Max Flow) </label><br>
+
+       <input type="checkbox" id="NeMo_Forward_12m_Sto (no Max Flow)" name="NeMo_Forward_12m_Sto (no Max Flow)" value="NeMo_Forward_12m_Sto (no Max Flow)">
+       <label for="NeMo_Forward_12m_Sto (no Max Flow)"> NeMo_Forward_12month_Sto (no Max Flow) </label><br>
+
+       <input type="checkbox" id="NeMo_Forward_12m_Sto (with Max Flow)" name="NeMo_Forward_12m_Sto (with Max Flow)" value="NeMo_Forward_12m_Sto (with Max Flow)">
+       <label for="NeMo_Forward_12m_Sto (with Max Flow)"> NeMo_Forward_12month_Sto (with Max Flow) </label><br>
+
+      <p> <b> Run Yearly Model Only with Export: </b> </p>
+      <p style = "color: red; font">Before Selecting the Following Options, Please Make Sure There are Input Data for Export </p>
+
+       <input type="checkbox" id="NeMo_Calendar_Y_Exp (no Max Flow)" name="NeMo_Calendar_Y_Exp (no Max Flow)" 
+       value="NeMo_Calendar_Y_Exp (no Max Flow)">
+       <label for="NeMo_Calendar_Y_Exp (no Max Flow)"> NeMo_Calendar_Year_Exp (no Max Flow) </label><br>
+
+       <input type="checkbox" id="NeMo_Calendar_Y_Exp (with Max Flow)" name="NeMo_Calendar_Y_Exp (with Max Flow)" value="NeMo_Calendar_Y_Exp (with Max Flow)">
+       <label for="NeMo_Calendar_Y_Exp (with Max Flow)"> NeMo_Calendar_Year_Exp (with Max Flow) </label><br>
+
+       <input type="checkbox" id="NeMo_Forward_12m_Exp (no Max Flow)" name="NeMo_Forward_12m_Exp (no Max Flow)" value="NeMo_Forward_12m_Exp (no Max Flow)">
+       <label for="NeMo_Forward_12m_Exp (no Max Flow)"> NeMo_Forward_12month_Exp (no Max Flow) </label><br>
+
+       <input type="checkbox" id="NeMo_Forward_12m_Exp (with Max Flow)" name="NeMo_Forward_12m_Exp (with Max Flow)" value="NeMo_Forward_12m_Exp (with Max Flow)">
+       <label for="NeMo_Forward_12m_Exp (with Max Flow)"> NeMo_Forward_12month_Exp (with Max Flow) </label><br>
+
+      <p> <b> Run Yearly Model with Both Storage and Export: </b></p>
+      <p style = "color: red; font">Before Selecting the Following Options, Please Make Sure There are Input Data for Storage and Export</p>
+
+       <input type="checkbox" id="NeMo_Calendar_Y_StoExp (no Max Flow)" name="NeMo_Calendar_Y_StoExp (no Max Flow)" 
+       value="NeMo_Calendar_Y_StoExp (no Max Flow)">
+       <label for="NeMo_Calendar_Y_StoExp (no Max Flow)"> NeMo_Calendar_Year_StoExp (no Max Flow)</label><br>
+
+       <input type="checkbox" id="NeMo_Calendar_Y_StoExp (with Max Flow)" name="NeMo_Calendar_Y_StoExp (with Max Flow)" value="NeMo_Calendar_Y_StoExp (with Max Flow)">
+       <label for="NeMo_Calendar_Y_StoExp (with Max Flow)"> NeMo_Calendar_Year_StoExp (with Max Flow)</label><br>
+
+       <input type="checkbox" id="NeMo_Forward_12m_StoExp (no Max Flow)" name="NeMo_Forward_12m_StoExp (no Max Flow)" value="NeMo_Forward_12m_StoExp (no Max Flow)">
+       <label for="NeMo_Forward_12m_StoExp (no Max Flow)"> NeMo_Forward_12month_StoExp (no Max Flow)</label><br>
+
+       <input type="checkbox" id="NeMo_Forward_12m_StoExp (with Max Flow)" name="NeMo_Forward_12m_StoExp (with Max Flow)" value="NeMo_Forward_12m_StoExp (with Max Flow)">
+       <label for="NeMo_Forward_12m_StoExp (with Max Flow)"> NeMo_Forward_12month_StoExp (with Max Flow)</label><br>
+      </fieldset><br>
+
+
+
+
+  <table border="2" frame="hsides" rules="groups" > 
+  <CAPTION style="caption-side: top;color:black;">Infrastructure Tariff Utilisation 'congestion charge'</CAPTION>
+    <COLGROUP align="center">
+    <COLGROUP align="center">
+    <COLGROUP align="center" span="2">
+    <COLGROUP align="center" span="3">
+    <THEAD valign="top">
+    <thead> 
+      <tr > 
+        <th>Tranche</th> 
+        <th>Cost Multiplier</th> 
+        <th>Capacity Portion</th> 
+        
+      </tr> 
+    </thead> 
+    <tbody> 
+      <tr align= "center"> 
+        <td><input name="T1" type="text" value="T1" readonly></td> 
+        <td><input name="T11" type="number" value="1.0" step="0.1" min="1.0" max="20.0" required></td> 
+        <td><input name="T12" type="number" value="0.70" step="0.01" min="0.00" max="1.00" required></td> 
+      
+      </tr>
+      <tr align= "center"> 
+        <td><input  name="T2" type="text" value="T2" readonly></td> 
+        <td><input  name="T21" type="number" value="2.5" step="0.1" min="1.0" max="20.0" required></td> 
+        <td><input name="T22" type="number" value="0.25" step="0.01" min="0.00" max="1.00" required></td> 
+      </tr> 
+      <tr align= "center"> 
+        <td><input name="T3" type="text" value="T3" readonly></td> 
+        <td><input name="T31" type="number" value="10.0" step="0.1" min="1.0" max="20.0" required></td> 
+        <td><input name="T32" type="number" value="0.05" step="0.01" min="0.00" max="1.00" required></td> 
+      </tr> 
+  </tbody>
+  </table>
+      <br><br><button class="btn btn-sm btn-success" type="submit" style="font-size:100%;" onclick="loading();"  >Run</button>
+     </form><br>
+   </div>
+      <a href="/update_dev"  id ='page' >Update DEV</a><br><br>
+      <a href="/delete"  id ='page' >Delete Case</CENTER></a><br>
+
+
+
+    
+
+
+
+  
+   <br>
+   <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+    <a href="/" class="btn btn-neutral float-right" accesskey="n" rel="next" style="text-decoration: none; color: #000000;background-color: white;border: 2px solid black;font-size:85%;">Home <span class="fa fa-arrow-circle-right"></span></a>
+    <a href="/update_input" class="btn btn-neutral" accesskey="p" rel="prev" style="text-decoration: none; color: #000000;background-color: white;border: 2px solid black;font-size:85%;">InputUpdate<span class="fa fa-arrow-circle-left"></span> </a>
+
+   </div>
+
+{% endblock %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+    
+    <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <script charset="utf-8" type="text/javascript">
+    $(function() {
+
+        // jQuery selection for the 2 select boxes
+        var dropdown = {
+            case: $('#select_case'),
+            start: $('#select_start')
+        };
+
+        // call to update on load
+        update_start();
+
+        // function to call XHR and update county dropdown
+        function update_start() {
+            var send = {
+                case: dropdown.case.val()
+            };
+            dropdown.start.attr('disabled', 'disabled');
+            dropdown.start.empty();
+            $.getJSON("{{ url_for('_get_start') }}", send, function(data) {
+                data.forEach(function(item) {
+                    dropdown.start.append(
+                        $('<option>', {
+                            value: item[0],
+                            text: item[1]
+                        })
+                    );
+                });
+                dropdown.start.removeAttr('disabled');
+            });
+        }
+
+        // event listener to state dropdown change
+        dropdown.case.on('change', function() {
+            update_start();
+        });
+
+    });
+
+    </script>
+
+    <script charset="utf-8" type="text/javascript">
+    $(function() {
+
+        // jQuery selection for the 2 select boxes
+        var dropdown = {
+            case: $('#select_case'),
+            end: $('#select_end')
+        };
+
+        // call to update on load
+        update_end();
+
+        // function to call XHR and update county dropdown
+        function update_end() {
+            var send = {
+                case: dropdown.case.val()
+            };
+            dropdown.end.attr('disabled', 'disabled');
+            dropdown.end.empty();
+            $.getJSON("{{ url_for('_get_end') }}", send, function(data) {
+                data.forEach(function(item) {
+                    dropdown.end.append(
+                        $('<option>', {
+                            value: item[0],
+                            text: item[1]
+                        })
+                    );
+                });
+                dropdown.end.removeAttr('disabled');
+            });
+        }
+
+        // event listener to state dropdown change
+        dropdown.case.on('change', function() {
+            update_end();
+        });
+
+    });
+
+    </script>
+
+    <script type="text/javascript">// <![CDATA[
+        function loading(){
+            $("#loading").show();
+            $("#content").hide();       
+        }
+    </script>
+    <script type="text/javascript">
+      $('input[type="checkbox"]').on('change', function() {
+   $(this).siblings('input[type="checkbox"]').prop('checked', false);
+      });
+    </script>
+  </body>
+</html>
