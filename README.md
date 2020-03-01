@@ -1,7 +1,7 @@
 # Linear_Programming_Model__FlaskWebApp
 This project includes two parts:   
 (1) Linear Optimization Models based in Python for the natural gas market   
-to predict optimal demand price and gas flow   
+to predict the equilibrium demand price and volume of gas transit  
 with the objective function of minimizing costs of supply, transit, export and storage,  
 and contraints of supply-demand balances, and capacity restrictions.   
 (2) Web Application --  
